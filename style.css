@@ -531,7 +531,7 @@ main {
   height: 0;
   background: var(--accent-color);
   border-radius: 50%;
-  box-shadow: 0 0 1000px 80px var(--accent-color);
+  box-shadow: 0 0 1000px 50px var(--accent-color);
   z-index: -10;
   -webkit-animation: pulseMove 6s linear infinite;
   -moz-animation: pulseMove 6s linear infinite;
