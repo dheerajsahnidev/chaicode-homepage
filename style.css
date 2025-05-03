@@ -142,6 +142,7 @@ html.light-mode {
 body {
   color: var(--text-color);
   position: relative;
+  overflow-x: hidden;
 }
 
 body::before {

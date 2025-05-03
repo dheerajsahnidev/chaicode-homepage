@@ -1,4 +1,4 @@
-import { notifications } from "./allData.js";
+import { notifications, cohortsData } from "./allData.js";
 
 ///////////// DARK & LIGHT MODE //////////////
 
@@ -123,37 +123,113 @@ window.addEventListener("resize", adjustHeroSectionHeight);
 
 //////////////// COHORTS SECTION /////////////////
 
-const currencySymbol = "₹";
-const priceDivArr = Array.from(document.querySelectorAll(".cohorts-section .cohorts-wrapper .cohort .price"));
+const cohortsWrapper = document.querySelector(".cohorts-section .cohorts-wrapper");
 
-priceDivArr.forEach((priceDiv) => {
-  const priceAfterDiscountSpan = priceDiv.children[0];
-  const priceAfterDiscountAmount = +priceDiv.children[0].innerText;
+cohortsData.forEach((cohortData) => {
+  const fragment = document.createDocumentFragment();
 
-  const realPriceSpan = priceDiv.children[1];
-  const realPriceAmount = +priceDiv.children[1].innerText;
+  const cohort = document.createElement("div");
+  cohort.classList.add("cohort");
 
-  const savePercentDiv = priceDiv.children[2];
+  const iframeWrapper = document.createElement("div");
+  iframeWrapper.classList.add("iframe-wrapper");
 
-  const discount = realPriceAmount - priceAfterDiscountAmount;
-  const discountPercent = Math.round((discount * 100) / realPriceAmount);
+  const iframe = document.createElement("iframe");
+  iframe.src = cohortData.ytVideoEmbedIframe.src;
+  iframe.title = cohortData.ytVideoEmbedIframe.title;
+  iframe.frameborder = "0";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.referrerpolicy = "strict-origin-when-cross-origin";
+  iframe.allowFullscreen = "true";
 
-  priceAfterDiscountSpan.innerText = `${currencySymbol} ${priceAfterDiscountAmount}`;
-  realPriceSpan.innerText = `${currencySymbol} ${realPriceAmount}`;
+  iframeWrapper.appendChild(iframe);
 
-  savePercentDiv.innerText = `Save ${discountPercent}%`;
-});
+  const tags = document.createElement("div");
+  tags.classList.add("tags");
+  cohortData.tags.push("+1");
+  cohortData.tags.forEach((tag) => {
+    const span = document.createElement("span");
+    span.innerText = tag;
+    tags.appendChild(span);
+  });
 
-const startDateDivArr = Array.from(
-  document.querySelectorAll(".cohorts-section .cohorts-wrapper .cohort .course-timeline .start-date")
-);
+  iframeWrapper.appendChild(tags);
 
-startDateDivArr.forEach((startDateDiv) => {
-  const textNode = [...startDateDiv.childNodes].find((node) => node.nodeType === Node.TEXT_NODE);
+  const h3 = document.createElement("h3");
+  h3.innerText = cohortData.heading;
 
-  if (textNode) {
-    textNode.textContent = `Starts ${textNode.textContent.trim()}`;
-  }
+  const p = document.createElement("p");
+  p.innerText = cohortData.description;
+
+  const courseTimeline = document.createElement("div");
+  courseTimeline.classList.add("course-timeline");
+
+  const startDate = document.createElement("div");
+  startDate.classList.add("start-date");
+  const calenderImg = document.createElement("img");
+  calenderImg.src = "/images/start-date.svg";
+  calenderImg.alt = "calender";
+  const startDateTextNode = document.createTextNode(`Starts ${cohortData.startDate}`);
+  startDate.appendChild(calenderImg);
+  startDate.appendChild(startDateTextNode);
+
+  courseTimeline.appendChild(startDate);
+
+  const duration = document.createElement("div");
+  duration.classList.add("duration");
+  const clockImg = document.createElement("img");
+  clockImg.src = "/images/duration.svg";
+  clockImg.alt = "clock";
+  const durationTextNode = document.createTextNode(cohortData.duration);
+  duration.appendChild(clockImg);
+  duration.appendChild(durationTextNode);
+
+  courseTimeline.appendChild(duration);
+
+  const price = document.createElement("div");
+  price.classList.add("price");
+
+  const priceAfterDiscount = document.createElement("span");
+  priceAfterDiscount.classList.add("price-after-discount");
+  priceAfterDiscount.innerText = `₹ ${cohortData.priceAfterDiscount}`;
+  price.appendChild(priceAfterDiscount);
+
+  const realPrice = document.createElement("span");
+  realPrice.classList.add("real-price");
+  realPrice.innerText = `₹ ${cohortData.realPrice}`;
+  price.appendChild(realPrice);
+
+  const savePercent = document.createElement("div");
+  savePercent.classList.add("save-percent");
+  const discount = +cohortData.realPrice - +cohortData.priceAfterDiscount;
+  const discountPercent = Math.round((discount * 100) / +cohortData.realPrice);
+  savePercent.innerText = `Save ${discountPercent}%`;
+  price.appendChild(savePercent);
+
+  const a = document.createElement("a");
+  a.classList.add("buy-now");
+  a.innerText = "Buy Now";
+  a.href = cohortData.buyNowLink;
+
+  const live = document.createElement("div");
+  live.classList.add("live");
+  const liveTextNode = document.createTextNode("Live ");
+  const blinker = document.createElement("span");
+  blinker.classList.add("blinker");
+  live.appendChild(liveTextNode);
+  live.appendChild(blinker);
+
+  cohort.appendChild(iframeWrapper);
+  cohort.appendChild(h3);
+  cohort.appendChild(p);
+  cohort.appendChild(courseTimeline);
+  cohort.appendChild(price);
+  cohort.appendChild(a);
+  cohort.appendChild(live);
+
+  fragment.appendChild(cohort);
+
+  cohortsWrapper.appendChild(fragment);
 });
 
 ///////////////// FOOTER ///////////////
@@ -170,7 +246,7 @@ const mailtoAnchorArr = Array.from(document.querySelectorAll(".mailto"));
 
 mailtoAnchorArr.forEach((mailtoAnchor) => {
   mailtoAnchor.href = "mailto:team@chaicode.com";
-  console.log("first")
+  console.log("first");
 });
 
 ///////////////// EXTRA FEATURES /////////////////
