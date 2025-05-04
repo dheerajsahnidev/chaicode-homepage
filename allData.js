@@ -20,9 +20,28 @@ export const notificationsData = [
     notificationText: "Yay!!🎉🎉 Coding Hero 2025 relaunced🔥(UPDATED)🥳",
     notificationLink: "https://youtu.be/Fw3FezexzV0",
   },
+  {
+    notificationText: "Finally!! DSA with C++ cohort launched🥳🔥(ON HIGH DEMAND)",
+    notificationLink: "https://youtu.be/dz5C-r0Z9AA",
+  },
 ];
 
+///////////// FOR COHORTS SECTION /////////////////
 export const cohortsData = [
+  {
+    ytVideoEmbedIframe: {
+      src: "https://www.youtube.com/embed/dz5C-r0Z9AA",
+      title: "DSA with C++ cohort Launch",
+    },
+    tags: ["C++", "DSA", "Algorithms"],
+    heading: "DSA with C++ 1.0",
+    description: "Focus on DSA with C++ for interview preparation",
+    startDate: "03 May 2025",
+    duration: "3 months",
+    priceAfterDiscount: "5999",
+    realPrice: "9999",
+    buyNowLink: "https://courses.chaicode.com/learn/batch/about?bundleId=230409",
+  },
   {
     ytVideoEmbedIframe: {
       src: "https://www.youtube.com/embed/Kjd-SWpe1do",
@@ -95,6 +114,7 @@ export const cohortsData = [
   },
 ];
 
+////////////// FOR TOPICS CLOUD SECTION /////////////
 export const topicsCloudData = [
   {
     topicYTVideoLink: "https://youtu.be/zCsbp_iBTq8",

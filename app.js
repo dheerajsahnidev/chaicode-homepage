@@ -256,7 +256,6 @@ topicsCloudData.forEach((topicCloudData) => {
 
   a.appendChild(span);
 
-  console.log(a);
   topicsWrapperFragment.appendChild(a);
 });
 
@@ -276,7 +275,6 @@ const mailtoAnchorArr = Array.from(document.querySelectorAll(".mailto"));
 
 mailtoAnchorArr.forEach((mailtoAnchor) => {
   mailtoAnchor.href = "mailto:team@chaicode.com";
-  console.log("first");
 });
 
 ///////////////// EXTRA FEATURES /////////////////

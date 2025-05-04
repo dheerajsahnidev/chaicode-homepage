@@ -1452,7 +1452,6 @@ main {
   font-size: 1.5em;
   padding: 5px 15px;
   background: #3dca7c5f;
-  /* background: #ffa60053; */
   border-radius: 5px;
 }
 
@@ -1462,15 +1461,37 @@ main {
 
 .discord-community-section .right {
   flex-basis: 1;
-  border: 2px solid #5865f2;
-  border-radius: 10px;
+  border: 5px solid #5865f2;
+  border-radius: 20px;
+  overflow: hidden;
   width: 300px;
   height: 300px;
 }
 
-.discord-community-section .right img {
-  flex: 1;
-  width: 100%;
+.discord-community-section .right .chaicode-img-container {
+  height: 80%;
+  text-align: center;
+  background: var(--accent-gradient);
+}
+
+.discord-community-section .right .chaicode-img-container img {
+  height: 100%;
+}
+
+.discord-community-section .right .discord-img-container {
+  height: 20%;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+  padding: 10px 0;
+  color: var(--text-color);
+  background: var(--bg-color);
+}
+
+.discord-community-section .right .discord-img-container img {
+  width: 30px;
+  vertical-align: bottom;
+  margin-right: 10px;
 }
 
 .discord-community-section .bottom {
@@ -1766,6 +1787,9 @@ main.pages.page-not-found a:hover {
   }
   .udemy-section .udemy-courses-wrapper {
     max-width: 100%;
+  }
+  .discord-community-section .right {
+    width: 100%;
   }
 }
 
