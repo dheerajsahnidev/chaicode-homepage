@@ -1352,63 +1352,65 @@ main {
 .topics-cloud-section .topics-wrapper {
   margin: 3% auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 30px;
+  flex-wrap: wrap;
+  max-width: 60%;
 }
 
-.topics-cloud-section .topics-wrapper .line {
-  animation: vibrate 1s infinite alternate;
-}
-
-.topics-cloud-section .topics-wrapper .line-2 {
-  animation: vibrate 1s infinite alternate-reverse;
-}
-
-@keyframes vibrate {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(10px);
-  }
-}
-
-.topics-cloud-section .topics-wrapper .line,
-.topics-cloud-section .topics-wrapper .line .topic {
+.topics-cloud-section .topics-wrapper .topic {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.topics-cloud-section .topics-wrapper .line:hover {
-  animation: none;
-}
-
-.topics-cloud-section .topics-wrapper .line .topic {
   gap: 10px;
+  flex-wrap: wrap;
   padding: 5px 10px;
   border-radius: 5px;
   border: 1px solid var(--grid-color);
+  color: var(--text-color);
   backdrop-filter: blur(5px);
   transition: var(--universal-trans);
   cursor: pointer;
+  animation: moveUpAndGrowBig 1s infinite alternate both;
 }
 
-.topics-cloud-section .topics-wrapper .line .topic:hover {
+.topics-cloud-section .topics-wrapper .topic:nth-child(even) {
+  animation: reverseMoveUpAndGrowBig 1s infinite alternate both;
+}
+
+@keyframes moveUpAndGrowBig {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(10px) scale(1.1);
+  }
+}
+
+@keyframes reverseMoveUpAndGrowBig {
+  0%,
+  100% {
+    transform: translateY(10px) scale(1.1);
+  }
+  50% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.topics-cloud-section .topics-wrapper .topic:hover {
   transform: var(--lift-up);
   box-shadow: var(--glowing-effect-boxshadow);
+  animation-play-state: paused;
 }
 
-.topics-cloud-section .topics-wrapper .line .topic img {
+.topics-cloud-section .topics-wrapper .topic img {
   width: 30px;
   padding: 2px;
 }
 
-.topics-cloud-section .topics-wrapper .line .topic img.bg {
+.topics-cloud-section .topics-wrapper .topic img.bg {
   background: var(--accent-color-white);
   border-radius: 50%;
 }
@@ -1779,6 +1781,9 @@ main.pages.page-not-found a:hover {
   }
   .key-benefits-section .benefits-wrapper {
     flex-direction: column;
+  }
+  .topics-cloud-section .topics-wrapper {
+    max-width: 100%;
   }
   footer .bottom {
     font-size: 3em;

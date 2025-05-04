@@ -1,4 +1,4 @@
-import { notifications, cohortsData } from "./allData.js";
+import { notificationsData, cohortsData, topicsCloudData } from "./allData.js";
 
 ///////////// DARK & LIGHT MODE //////////////
 
@@ -78,10 +78,10 @@ const cancelBtn = document.querySelector(".notification-bar .cancel-btn");
 
 let i = 0;
 const intervalID = setInterval(() => {
-  notificationBarSpanElem.innerHTML = notifications[i].notificationText;
-  checkNowLink.href = notifications[i].notificationLink;
+  notificationBarSpanElem.innerHTML = notificationsData[i].notificationText;
+  checkNowLink.href = notificationsData[i].notificationLink;
   i++;
-  if (i >= notifications.length) i = 0;
+  if (i >= notificationsData.length) i = 0;
 }, 4000);
 
 cancelBtn.addEventListener("click", () => {
@@ -125,9 +125,9 @@ window.addEventListener("resize", adjustHeroSectionHeight);
 
 const cohortsWrapper = document.querySelector(".cohorts-section .cohorts-wrapper");
 
-cohortsData.forEach((cohortData) => {
-  const fragment = document.createDocumentFragment();
+const cohortsWrapperFragment = document.createDocumentFragment();
 
+cohortsData.forEach((cohortData) => {
   const cohort = document.createElement("div");
   cohort.classList.add("cohort");
 
@@ -219,18 +219,48 @@ cohortsData.forEach((cohortData) => {
   live.appendChild(liveTextNode);
   live.appendChild(blinker);
 
-  cohort.appendChild(iframeWrapper);
-  cohort.appendChild(h3);
-  cohort.appendChild(p);
-  cohort.appendChild(courseTimeline);
-  cohort.appendChild(price);
-  cohort.appendChild(a);
-  cohort.appendChild(live);
+  const elementsToBeAppended = [iframeWrapper, h3, p, courseTimeline, price, a, live];
 
-  fragment.appendChild(cohort);
+  elementsToBeAppended.forEach((element) => {
+    cohort.appendChild(element);
+  });
 
-  cohortsWrapper.appendChild(fragment);
+  cohortsWrapperFragment.appendChild(cohort);
 });
+
+cohortsWrapper.appendChild(cohortsWrapperFragment);
+
+///////////////////// TOPICS CLOUD SECTION ///////////////////
+
+const topicsWrapper = document.querySelector(".topics-cloud-section .topics-wrapper");
+
+const topicsWrapperFragment = document.createDocumentFragment();
+
+topicsCloudData.forEach((topicCloudData) => {
+  const a = document.createElement("a");
+  a.classList.add("topic");
+  a.href = topicCloudData.topicYTVideoLink;
+  a.target = "_blank";
+
+  const img = document.createElement("img");
+  if (topicCloudData.bg) {
+    img.classList.add("bg");
+  }
+  img.src = topicCloudData.topicImg.src;
+  img.alt = topicCloudData.topicImg.alt;
+
+  a.appendChild(img);
+
+  const span = document.createElement("span");
+  span.innerText = topicCloudData.topicName;
+
+  a.appendChild(span);
+
+  console.log(a);
+  topicsWrapperFragment.appendChild(a);
+});
+
+topicsWrapper.appendChild(topicsWrapperFragment);
 
 ///////////////// FOOTER ///////////////
 
