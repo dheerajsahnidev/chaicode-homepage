@@ -114,6 +114,65 @@ export const cohortsData = [
   },
 ];
 
+////////////// FOR TESTIMONIALS SECTION ////////////
+
+export const testimonialsData = [
+  {
+    userAvatar: "/images/user-avatars/avatar1.svg",
+    userName: "Harsh Agrawal",
+    userProfession: "Coding Learner",
+    testimonialComment: "It was my best decision to be a student of Web Dev Cohot. Learing a lot of stuff. Thanks!!",
+    ratingStars: 5,
+  },
+  {
+    userAvatar: "/images/user-avatars/avatar2.svg",
+    userName: "Pawan Saini",
+    userProfession: "Student",
+    testimonialComment:
+      "Maine GenAI with python waala cohort buy kiya hai. Aur ye kaafi accha hai. Bohot hi maza aa rha hai padhne me. Thank you Hitesh sir.",
+    ratingStars: 5,
+  },
+  {
+    userAvatar: "/images/user-avatars/avatar3.svg",
+    userName: "Anju Tripathi",
+    userProfession: "Frontend Developer & Learing Backend",
+    testimonialComment: `After buying Web Dev Cohort, all I can say is - "This is a must buy paid class. I have pesonally used it and getting a lot of in-depth knowledge I didn't found on any youtube video. Worth Buying👍👍"`,
+    ratingStars: 5,
+  },
+  {
+    userAvatar: "/images/user-avatars/avatar4.svg",
+    userName: "Vijay Mohan",
+    userProfession: "Student, Coding Learner",
+    testimonialComment:
+      "Bohot hi accha GenAI with python cohort hai unke liye jinko kuch real me unique seekhna chahte hai.",
+    ratingStars: 5,
+  },
+  {
+    userAvatar: "/images/user-avatars/avatar5.svg",
+    userName: "Amrita",
+    userProfession: "Working at Wipro, Full Stack Developer",
+    testimonialComment:
+      "Wow! Can't believe the level of in-depth knowledge they are giving in these cohorts😯. Seriously the best classes I have ever joined in till now. Recommended to all!",
+    ratingStars: 5,
+  },
+  {
+    userAvatar: "/images/user-avatars/avatar6.svg",
+    userName: "",
+    userProfession: "Student, Web Developer",
+    testimonialComment:
+      "Ek baar aap lo khud ye web dev cohort join karke dekho aur quality of class dekho! Maine 2 - 3 months me hi itna seekh liya jitna mujhe youtube par 9 - 10 months lag jaate. Thanks sir!!",
+    ratingStars: 5,
+  },
+  {
+    userAvatar: "/images/user-avatars/avatar7.svg",
+    userName: "Sohail Iqubal Ali",
+    userProfession: "Backend Developer, Learning MERN Stack",
+    testimonialComment:
+      "It's astonishing for me how much knowledge they are providing in such a cheap price. I have been through a lot of cohorts of differnt teachers from all over the world but never seen such type of cohorts. Truely amazing. Eagerly waiting for DSA with JavaScript. Thanks.",
+    ratingStars: 5,
+  },
+];
+
 ////////////// FOR TOPICS CLOUD SECTION /////////////
 export const topicsCloudData = [
   {

@@ -1,4 +1,4 @@
-import { notificationsData, cohortsData, topicsCloudData } from "./allData.js";
+import { notificationsData, cohortsData, testimonialsData, topicsCloudData } from "./allData.js";
 
 ///////////// DARK & LIGHT MODE //////////////
 
@@ -229,6 +229,82 @@ cohortsData.forEach((cohortData) => {
 });
 
 cohortsWrapper.appendChild(cohortsWrapperFragment);
+
+//////////////////// FOR TESTIMONIALS SECTION /////////////////
+
+const testimonialsWrapper = document.querySelector(".testimonials-section .testimonails-wrapper");
+
+const testimonialsWrapperFragment = document.createDocumentFragment();
+
+testimonialsData.forEach((testimonialData) => {
+  const testimonial = document.createElement("div");
+  testimonial.classList.add("testimonial");
+
+  const userInfoWrapper = document.createElement("div");
+  userInfoWrapper.classList.add("user-info-wrapper");
+
+  const avatar = document.createElement("div");
+  avatar.classList.add("avatar");
+
+  const img = document.createElement("img");
+  img.src = testimonialData.userAvatar;
+  img.alt = "user avatar";
+
+  avatar.appendChild(img);
+
+  const userInfo = document.createElement("div");
+  userInfo.classList.add("user-info");
+
+  const h3 = document.createElement("h3");
+  h3.classList.add("user-name");
+  h3.innerText = testimonialData.userName;
+
+  userInfo.appendChild(h3);
+
+  const p = document.createElement("p");
+  p.classList.add("user-profession");
+  p.innerText = testimonialData.userProfession;
+
+  userInfo.appendChild(p);
+
+  userInfoWrapper.appendChild(avatar);
+  userInfoWrapper.appendChild(userInfo);
+
+  const testimonialComment = document.createElement("div");
+  testimonialComment.classList.add("testimonial-comment");
+  testimonialComment.innerText = testimonialData.testimonialComment;
+
+  const rating = document.createElement("div");
+  rating.classList.add("rating");
+
+  const yellowStars = +testimonialData.ratingStars;
+  const grayStars = +(5 - yellowStars);
+
+  if (!grayStars && !yellowStars) {
+    const textNode = document.createTextNode("No rating");
+    rating.appendChild(textNode);
+  }
+
+  [yellowStars, grayStars].forEach((stars, index) => {
+    for (let i = 1; i <= stars; i++) {
+      const img = document.createElement("img");
+      img.src = index === 0 ? "/images/rating-star-yellow.svg" : "/images/rating-star-gray.svg";
+      img.alt = index === 0 ? "rating star yellow" : "rating star gray";
+
+      rating.appendChild(img);
+    }
+  });
+
+  const elementsToBeAppended = [userInfoWrapper, testimonialComment, rating];
+
+  elementsToBeAppended.forEach((element) => {
+    testimonial.appendChild(element);
+  });
+
+  testimonialsWrapperFragment.appendChild(testimonial);
+});
+
+testimonialsWrapper.appendChild(testimonialsWrapperFragment);
 
 ///////////////////// KEY BENEFITS SECTION ///////////////////
 
