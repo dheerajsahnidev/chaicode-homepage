@@ -230,6 +230,93 @@ cohortsData.forEach((cohortData) => {
 
 cohortsWrapper.appendChild(cohortsWrapperFragment);
 
+///////////////////// KEY BENEFITS SECTION ///////////////////
+
+const aluminiNetworkCanvas = document.getElementById("aluminiNetworkCanvas");
+const width = (aluminiNetworkCanvas.width = aluminiNetworkCanvas.offsetWidth);
+const height = (aluminiNetworkCanvas.height = 300);
+
+const ctx = aluminiNetworkCanvas.getContext("2d");
+
+const gradient = ctx.createLinearGradient(0, 0, width, height);
+gradient.addColorStop(0, "#ffa500");
+gradient.addColorStop(1, "#ea580c");
+
+class Circle {
+  constructor(x, y, r, dx, dy) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.dx = dx;
+    this.dy = dy;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    ctx.closePath();
+  }
+  update() {
+    if (this.x + this.r > width || this.x - this.r < 0) {
+      this.dx = -this.dx;
+    }
+    if (this.y + this.r > height || this.y - this.r < 0) {
+      this.dy = -this.dy;
+    }
+    this.x += this.dx;
+    this.y += this.dy;
+    this.draw();
+  }
+}
+
+const circleArr = [];
+for (let i = 0; i < 20; i++) {
+  let r = Math.floor(Math.random() * 20) + 1;
+  let x = Math.random() * (width - r * 2) + r;
+  let y = Math.random() * (height - r * 2) + r;
+  let dx = (Math.random() - 0.5) * 5;
+  let dy = (Math.random() - 0.5) * 5;
+
+  circleArr.push(new Circle(x, y, r, dx, dy));
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, width, height);
+
+  for (let i = 0; i < circleArr.length; i++) {
+    for (let j = i + 1; j < circleArr.length; j++) {
+      const c1 = circleArr[i];
+      const c2 = circleArr[j];
+
+      const dx = c1.x - c2.x;
+      const dy = c1.y - c2.y;
+      const distance = Math.hypot(dx, dy);
+
+      const maxDistance = 180;
+
+      if (distance < maxDistance) {
+        const opacity = 1 - distance / maxDistance;
+        ctx.strokeStyle = `rgba(255, 165, 0, ${opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(c1.x, c1.y);
+        ctx.lineTo(c2.x, c2.y);
+        ctx.stroke();
+        ctx.closePath();
+      }
+    }
+  }
+
+  for (const circle of circleArr) {
+    circle.update();
+  }
+}
+
+animate();
+
 ///////////////////// TOPICS CLOUD SECTION ///////////////////
 
 const topicsWrapper = document.querySelector(".topics-cloud-section .topics-wrapper");
