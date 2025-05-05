@@ -157,7 +157,7 @@ export const testimonialsData = [
   },
   {
     userAvatar: "/images/user-avatars/avatar6.svg",
-    userName: "",
+    userName: "Dheeraj Sahni",
     userProfession: "Student, Web Developer",
     testimonialComment:
       "Ek baar aap lo khud ye web dev cohort join karke dekho aur quality of class dekho! Maine 2 - 3 months me hi itna seekh liya jitna mujhe youtube par 9 - 10 months lag jaate. Thanks sir!!",
