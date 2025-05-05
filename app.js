@@ -277,13 +277,8 @@ testimonialsData.forEach((testimonialData) => {
   const rating = document.createElement("div");
   rating.classList.add("rating");
 
-  const yellowStars = +testimonialData.ratingStars;
+  const yellowStars = +testimonialData.ratingStars <= 5 ? +testimonialData.ratingStars : 5;
   const grayStars = +(5 - yellowStars);
-
-  if (!grayStars && !yellowStars) {
-    const textNode = document.createTextNode("No rating");
-    rating.appendChild(textNode);
-  }
 
   [yellowStars, grayStars].forEach((stars, index) => {
     for (let i = 1; i <= stars; i++) {
