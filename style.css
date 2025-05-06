@@ -1621,7 +1621,15 @@ main {
   color: var(--accent-color-white);
   position: relative;
   overflow: hidden;
-  box-shadow: var(--glowing-effect-boxshadow);
+  box-shadow: 0 0 500px 0 var(--accent-color);
+  animation: moveUpDown 0.8s infinite alternate;
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.download-app-section .app-info-wrapper .left .smartphone:hover {
+  animation: none;
 }
 
 .smartphone .title-bar,

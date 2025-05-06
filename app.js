@@ -458,3 +458,31 @@ if (!window.navigator.onLine) {
   youtubeIframeWrapper.classList.add("offline");
   youtubeIframe.style.display = "none";
 }
+
+
+const smartphone = document.querySelector(".download-app-section .app-info-wrapper .left .smartphone");
+const motionMatchMedia = window.matchMedia("(prefers-reduced-motion)");
+const THRESHOLD = 15;
+
+function handleHover(e) {
+  const { clientX, clientY, currentTarget } = e;
+  const { clientWidth, clientHeight } = currentTarget;
+  const offsetLeft = currentTarget.getBoundingClientRect().left;
+  const offsetTop = currentTarget.getBoundingClientRect().top;
+
+  const horizontal = (clientX - offsetLeft) / clientWidth;
+  const vertical = (clientY - offsetTop) / clientHeight;
+  const rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
+  const rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+
+  smartphone.style.transform = `perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1, 1, 1)`;
+}
+
+function resetStyles(e) {
+  smartphone.style.transform = `perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
+}
+
+if (!motionMatchMedia.matches) {
+  smartphone.addEventListener("mousemove", handleHover);
+  smartphone.addEventListener("mouseleave", resetStyles);
+}
