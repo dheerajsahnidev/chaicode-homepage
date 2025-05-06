@@ -459,7 +459,7 @@ if (!window.navigator.onLine) {
   youtubeIframe.style.display = "none";
 }
 
-
+// smartphone hover animation 3D effect
 const smartphone = document.querySelector(".download-app-section .app-info-wrapper .left .smartphone");
 const motionMatchMedia = window.matchMedia("(prefers-reduced-motion)");
 const THRESHOLD = 15;
