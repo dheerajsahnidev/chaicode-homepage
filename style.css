@@ -97,12 +97,14 @@ section:not(.hero-section) > h2 + p {
   color: var(--accent-color-white);
 }
 
-a.join-cohorts-live-classes {
+a.join-cohorts-live-classes,
+a.explore-all-tutorials {
   display: block;
   max-width: fit-content;
   padding: 10px 20px;
   border-radius: 40px;
-  margin: 40px auto 0;
+  /* margin: 40px auto 0; */
+  margin: 40px 0;
   color: var(--accent-color-white);
   background: var(--accent-gradient);
   backdrop-filter: blur(10px);
@@ -113,7 +115,8 @@ a.join-cohorts-live-classes {
   -moz-transition: all 0.3s linear;
 }
 
-a.join-cohorts-live-classes:hover {
+a.join-cohorts-live-classes:hover,
+a.explore-all-tutorials:hover {
   box-shadow: 0 0 30px 5px var(--accent-color);
   -webkit-filter: brightness(120%);
   -moz-filter: brightness(120%);
@@ -715,45 +718,6 @@ main {
   color: var(--text-color);
 }
 
-/* .tweets-section h2 {
-  margin-bottom: 2%;
-  position: relative;
-} */
-
-/* .tweets-section h2::after {
-  position: absolute;
-  content: "";
-  width: 150px;
-  height: 5px;
-  border-radius: 20px;
-  background: var(--accent-gradient);
-  left: 50%;
-  bottom: -10px;
-  transform: translate(-50%, -50%);
-} */
-
-/* .tweets-section .tweets {
-  column-count: 3;
-  column-gap: 30px;
-  padding: 10px;
-  margin-top: 2%;
-} */
-
-/* .tweet {
-  break-inside: avoid;
-  margin-bottom: 30px;
-} */
-
-/* .tweets-section .tweets {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: masonry;
-  flex-wrap: wrap;
-  padding: 10px;
-  margin-top: 2%;
-} */
-
 .tweets-section .tweets {
   display: flex;
   align-items: center;
@@ -776,8 +740,6 @@ main {
   position: relative;
   overflow: hidden;
   transition: var(--universal-trans);
-  /* break-inside: avoid; */
-  /* margin-bottom: 30px; */
 }
 
 .tweets-section .tweets .tweet:hover {
@@ -1730,6 +1692,127 @@ main {
   -webkit-filter: brightness(120%);
   -moz-filter: brightness(120%);
   filter: brightness(120%);
+}
+
+/* .our-yt-channels css */
+.our-yt-channels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 5%;
+}
+
+.our-yt-channels .yt-channels-info-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.our-yt-channels .yt-channels-info-wrapper .left {
+  flex-basis: 500px;
+}
+
+.our-yt-channels .yt-channels-info-wrapper .left img {
+  width: 100%;
+}
+
+.our-yt-channels .yt-channels-info-wrapper .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.our-yt-channels .yt-channels-info-wrapper .right .yt-channel-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  border: 2px solid var(--accent-color);
+  padding: 20px;
+  border-radius: 20px;
+  transition: var(--universal-trans);
+  -webkit-backdrop-filter: blur(2px);
+  -moz-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.our-yt-channels .yt-channels-info-wrapper .right .yt-channel-info:hover {
+  box-shadow: var(--glowing-effect-boxshadow);
+  transform: var(--lift-up);
+}
+
+.yt-channel-info .top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.yt-channel-info .top img {
+  width: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--accent-color-white);
+  border: 2px solid var(--accent-color);
+}
+
+.yt-channel-info .top .channel-name-and-username h4 {
+  font-size: larger;
+  color: var(--accent-color);
+}
+
+.yt-channel-info .middle {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.yt-channel-info .middle p {
+  padding: 5px 20px;
+  border-radius: 20px;
+  background: #ea5a0c30;
+}
+
+.yt-channel-info .middle p span {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+.yt-channel-info .bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: var(--accent-color);
+}
+
+.yt-channel-info .bottom h3 {
+  font-size: x-large;
+}
+
+.yt-channel-info .bottom a {
+  padding: 5px 20px;
+  background: var(--accent-color);
+  border-radius: 20px;
+  transition: var(--universal-trans);
+  white-space: nowrap;
+}
+
+.yt-channel-info .bottom a:hover {
+  transform: scale(1.1);
+  box-shadow: var(--glowing-effect-boxshadow);
 }
 
 /* .download-app-section css */
