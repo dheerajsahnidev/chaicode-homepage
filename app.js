@@ -125,315 +125,337 @@ window.addEventListener("resize", adjustHeroSectionHeight);
 
 const cohortsWrapper = document.querySelector(".cohorts-section .cohorts-wrapper");
 
-const cohortsWrapperFragment = document.createDocumentFragment();
+if (cohortsWrapper) createAllCohorts();
 
-cohortsData.forEach((cohortData) => {
-  const cohort = document.createElement("div");
-  cohort.classList.add("cohort");
+function createAllCohorts() {
+  const cohortsWrapperFragment = document.createDocumentFragment();
 
-  const iframeWrapper = document.createElement("div");
-  iframeWrapper.classList.add("iframe-wrapper");
+  cohortsData.forEach((cohortData) => {
+    const cohort = document.createElement("div");
+    cohort.classList.add("cohort");
 
-  const iframe = document.createElement("iframe");
-  iframe.src = cohortData.ytVideoEmbedIframe.src;
-  iframe.title = cohortData.ytVideoEmbedIframe.title;
-  iframe.frameborder = "0";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-  iframe.referrerpolicy = "strict-origin-when-cross-origin";
-  iframe.allowFullscreen = "true";
+    const iframeWrapper = document.createElement("div");
+    iframeWrapper.classList.add("iframe-wrapper");
 
-  iframeWrapper.appendChild(iframe);
+    const iframe = document.createElement("iframe");
+    iframe.src = cohortData.ytVideoEmbedIframe.src;
+    iframe.title = cohortData.ytVideoEmbedIframe.title;
+    iframe.frameborder = "0";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.referrerpolicy = "strict-origin-when-cross-origin";
+    iframe.allowFullscreen = "true";
 
-  const tags = document.createElement("div");
-  tags.classList.add("tags");
-  cohortData.tags.push("+1");
-  cohortData.tags.forEach((tag) => {
-    const span = document.createElement("span");
-    span.innerText = tag;
-    tags.appendChild(span);
+    iframeWrapper.appendChild(iframe);
+
+    const tags = document.createElement("div");
+    tags.classList.add("tags");
+    cohortData.tags.push("+1");
+    cohortData.tags.forEach((tag) => {
+      const span = document.createElement("span");
+      span.innerText = tag;
+      tags.appendChild(span);
+    });
+
+    iframeWrapper.appendChild(tags);
+
+    const h3 = document.createElement("h3");
+    h3.innerText = cohortData.heading;
+
+    const p = document.createElement("p");
+    p.innerText = cohortData.description;
+
+    const courseTimeline = document.createElement("div");
+    courseTimeline.classList.add("course-timeline");
+
+    const startDate = document.createElement("div");
+    startDate.classList.add("start-date");
+    const calenderImg = document.createElement("img");
+    calenderImg.src = "/images/start-date.svg";
+    calenderImg.alt = "calender";
+    const startDateTextNode = document.createTextNode(`Starts ${cohortData.startDate}`);
+    startDate.appendChild(calenderImg);
+    startDate.appendChild(startDateTextNode);
+
+    courseTimeline.appendChild(startDate);
+
+    const duration = document.createElement("div");
+    duration.classList.add("duration");
+    const clockImg = document.createElement("img");
+    clockImg.src = "/images/duration.svg";
+    clockImg.alt = "clock";
+    const durationTextNode = document.createTextNode(cohortData.duration);
+    duration.appendChild(clockImg);
+    duration.appendChild(durationTextNode);
+
+    courseTimeline.appendChild(duration);
+
+    const price = document.createElement("div");
+    price.classList.add("price");
+
+    const priceAfterDiscount = document.createElement("span");
+    priceAfterDiscount.classList.add("price-after-discount");
+    priceAfterDiscount.innerText = `₹ ${cohortData.priceAfterDiscount}`;
+    price.appendChild(priceAfterDiscount);
+
+    const realPrice = document.createElement("span");
+    realPrice.classList.add("real-price");
+    realPrice.innerText = `₹ ${cohortData.realPrice}`;
+    price.appendChild(realPrice);
+
+    const savePercent = document.createElement("div");
+    savePercent.classList.add("save-percent");
+    const discount = +cohortData.realPrice - +cohortData.priceAfterDiscount;
+    const discountPercent = Math.round((discount * 100) / +cohortData.realPrice);
+    savePercent.innerText = `Save ${discountPercent}%`;
+    price.appendChild(savePercent);
+
+    const a = document.createElement("a");
+    a.classList.add("buy-now");
+    a.innerText = "Buy Now";
+    a.href = cohortData.buyNowLink;
+
+    const live = document.createElement("div");
+    live.classList.add("live");
+    const liveTextNode = document.createTextNode("Live ");
+    const blinker = document.createElement("span");
+    blinker.classList.add("blinker");
+    live.appendChild(liveTextNode);
+    live.appendChild(blinker);
+
+    const elementsToBeAppended = [iframeWrapper, h3, p, courseTimeline, price, a, live];
+
+    elementsToBeAppended.forEach((element) => {
+      cohort.appendChild(element);
+    });
+
+    cohortsWrapperFragment.appendChild(cohort);
   });
 
-  iframeWrapper.appendChild(tags);
-
-  const h3 = document.createElement("h3");
-  h3.innerText = cohortData.heading;
-
-  const p = document.createElement("p");
-  p.innerText = cohortData.description;
-
-  const courseTimeline = document.createElement("div");
-  courseTimeline.classList.add("course-timeline");
-
-  const startDate = document.createElement("div");
-  startDate.classList.add("start-date");
-  const calenderImg = document.createElement("img");
-  calenderImg.src = "/images/start-date.svg";
-  calenderImg.alt = "calender";
-  const startDateTextNode = document.createTextNode(`Starts ${cohortData.startDate}`);
-  startDate.appendChild(calenderImg);
-  startDate.appendChild(startDateTextNode);
-
-  courseTimeline.appendChild(startDate);
-
-  const duration = document.createElement("div");
-  duration.classList.add("duration");
-  const clockImg = document.createElement("img");
-  clockImg.src = "/images/duration.svg";
-  clockImg.alt = "clock";
-  const durationTextNode = document.createTextNode(cohortData.duration);
-  duration.appendChild(clockImg);
-  duration.appendChild(durationTextNode);
-
-  courseTimeline.appendChild(duration);
-
-  const price = document.createElement("div");
-  price.classList.add("price");
-
-  const priceAfterDiscount = document.createElement("span");
-  priceAfterDiscount.classList.add("price-after-discount");
-  priceAfterDiscount.innerText = `₹ ${cohortData.priceAfterDiscount}`;
-  price.appendChild(priceAfterDiscount);
-
-  const realPrice = document.createElement("span");
-  realPrice.classList.add("real-price");
-  realPrice.innerText = `₹ ${cohortData.realPrice}`;
-  price.appendChild(realPrice);
-
-  const savePercent = document.createElement("div");
-  savePercent.classList.add("save-percent");
-  const discount = +cohortData.realPrice - +cohortData.priceAfterDiscount;
-  const discountPercent = Math.round((discount * 100) / +cohortData.realPrice);
-  savePercent.innerText = `Save ${discountPercent}%`;
-  price.appendChild(savePercent);
-
-  const a = document.createElement("a");
-  a.classList.add("buy-now");
-  a.innerText = "Buy Now";
-  a.href = cohortData.buyNowLink;
-
-  const live = document.createElement("div");
-  live.classList.add("live");
-  const liveTextNode = document.createTextNode("Live ");
-  const blinker = document.createElement("span");
-  blinker.classList.add("blinker");
-  live.appendChild(liveTextNode);
-  live.appendChild(blinker);
-
-  const elementsToBeAppended = [iframeWrapper, h3, p, courseTimeline, price, a, live];
-
-  elementsToBeAppended.forEach((element) => {
-    cohort.appendChild(element);
-  });
-
-  cohortsWrapperFragment.appendChild(cohort);
-});
-
-cohortsWrapper.appendChild(cohortsWrapperFragment);
+  cohortsWrapper.appendChild(cohortsWrapperFragment);
+}
 
 //////////////////// FOR TESTIMONIALS SECTION /////////////////
 
 const testimonialsWrapper = document.querySelector(".testimonials-section .testimonails-wrapper");
 
-const testimonialsWrapperFragment = document.createDocumentFragment();
+if (testimonialsWrapper) createAllTestimonials();
 
-testimonialsData.forEach((testimonialData) => {
-  const testimonial = document.createElement("div");
-  testimonial.classList.add("testimonial");
+function createAllTestimonials() {
+  const testimonialsWrapperFragment = document.createDocumentFragment();
 
-  const userInfoWrapper = document.createElement("div");
-  userInfoWrapper.classList.add("user-info-wrapper");
+  testimonialsData.forEach((testimonialData) => {
+    const testimonial = document.createElement("div");
+    testimonial.classList.add("testimonial");
 
-  const avatar = document.createElement("div");
-  avatar.classList.add("avatar");
+    const userInfoWrapper = document.createElement("div");
+    userInfoWrapper.classList.add("user-info-wrapper");
 
-  const img = document.createElement("img");
-  img.src = testimonialData.userAvatar;
-  img.alt = "user avatar";
+    const avatar = document.createElement("div");
+    avatar.classList.add("avatar");
 
-  avatar.appendChild(img);
+    const img = document.createElement("img");
+    img.src = testimonialData.userAvatar;
+    img.alt = "user avatar";
 
-  const userInfo = document.createElement("div");
-  userInfo.classList.add("user-info");
+    avatar.appendChild(img);
 
-  const h3 = document.createElement("h3");
-  h3.classList.add("user-name");
-  h3.innerText = testimonialData.userName;
+    const userInfo = document.createElement("div");
+    userInfo.classList.add("user-info");
 
-  userInfo.appendChild(h3);
+    const h3 = document.createElement("h3");
+    h3.classList.add("user-name");
+    h3.innerText = testimonialData.userName;
 
-  const p = document.createElement("p");
-  p.classList.add("user-profession");
-  p.innerText = testimonialData.userProfession;
+    userInfo.appendChild(h3);
 
-  userInfo.appendChild(p);
+    const p = document.createElement("p");
+    p.classList.add("user-profession");
+    p.innerText = testimonialData.userProfession;
 
-  userInfoWrapper.appendChild(avatar);
-  userInfoWrapper.appendChild(userInfo);
+    userInfo.appendChild(p);
 
-  const testimonialComment = document.createElement("div");
-  testimonialComment.classList.add("testimonial-comment");
-  testimonialComment.innerText = testimonialData.testimonialComment;
+    userInfoWrapper.appendChild(avatar);
+    userInfoWrapper.appendChild(userInfo);
 
-  const rating = document.createElement("div");
-  rating.classList.add("rating");
+    const testimonialComment = document.createElement("div");
+    testimonialComment.classList.add("testimonial-comment");
+    testimonialComment.innerText = testimonialData.testimonialComment;
 
-  const yellowStars = +testimonialData.ratingStars <= 5 ? +testimonialData.ratingStars : 5;
-  const grayStars = +(5 - yellowStars);
+    const rating = document.createElement("div");
+    rating.classList.add("rating");
 
-  [yellowStars, grayStars].forEach((stars, index) => {
-    for (let i = 1; i <= stars; i++) {
-      const img = document.createElement("img");
-      img.src = index === 0 ? "/images/rating-star-yellow.svg" : "/images/rating-star-gray.svg";
-      img.alt = index === 0 ? "rating star yellow" : "rating star gray";
+    const yellowStars = +testimonialData.ratingStars <= 5 ? +testimonialData.ratingStars : 5;
+    const grayStars = +(5 - yellowStars);
 
-      rating.appendChild(img);
-    }
+    [yellowStars, grayStars].forEach((stars, index) => {
+      for (let i = 1; i <= stars; i++) {
+        const img = document.createElement("img");
+        img.src = index === 0 ? "/images/rating-star-yellow.svg" : "/images/rating-star-gray.svg";
+        img.alt = index === 0 ? "rating star yellow" : "rating star gray";
+
+        rating.appendChild(img);
+      }
+    });
+
+    const elementsToBeAppended = [userInfoWrapper, testimonialComment, rating];
+
+    elementsToBeAppended.forEach((element) => {
+      testimonial.appendChild(element);
+    });
+
+    testimonialsWrapperFragment.appendChild(testimonial);
   });
 
-  const elementsToBeAppended = [userInfoWrapper, testimonialComment, rating];
-
-  elementsToBeAppended.forEach((element) => {
-    testimonial.appendChild(element);
-  });
-
-  testimonialsWrapperFragment.appendChild(testimonial);
-});
-
-testimonialsWrapper.appendChild(testimonialsWrapperFragment);
+  testimonialsWrapper.appendChild(testimonialsWrapperFragment);
+}
 
 ///////////////////// KEY BENEFITS SECTION ///////////////////
 
 const aluminiNetworkCanvas = document.getElementById("aluminiNetworkCanvas");
-const width = (aluminiNetworkCanvas.width = aluminiNetworkCanvas.offsetWidth);
-const height = (aluminiNetworkCanvas.height = 300);
 
-const ctx = aluminiNetworkCanvas.getContext("2d");
+if (aluminiNetworkCanvas) createAluminiNetworkAnimation();
 
-const gradient = ctx.createLinearGradient(0, 0, width, height);
-gradient.addColorStop(0, "#ffa500");
-gradient.addColorStop(1, "#ea580c");
+function createAluminiNetworkAnimation() {
+  const width = (aluminiNetworkCanvas.width = aluminiNetworkCanvas.offsetWidth);
+  const height = (aluminiNetworkCanvas.height = 300);
 
-class Circle {
-  constructor(x, y, r, dx, dy) {
-    this.x = x;
-    this.y = y;
-    this.r = r;
-    this.dx = dx;
-    this.dy = dy;
-  }
+  const ctx = aluminiNetworkCanvas.getContext("2d");
 
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
-    ctx.fillStyle = gradient;
-    ctx.fill();
-    ctx.closePath();
-  }
-  update() {
-    if (this.x + this.r > width || this.x - this.r < 0) {
-      this.dx = -this.dx;
+  const gradient = ctx.createLinearGradient(0, 0, width, height);
+  gradient.addColorStop(0, "#ffa500");
+  gradient.addColorStop(1, "#ea580c");
+
+  class Circle {
+    constructor(x, y, r, dx, dy) {
+      this.x = x;
+      this.y = y;
+      this.r = r;
+      this.dx = dx;
+      this.dy = dy;
     }
-    if (this.y + this.r > height || this.y - this.r < 0) {
-      this.dy = -this.dy;
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      ctx.closePath();
     }
-    this.x += this.dx;
-    this.y += this.dy;
-    this.draw();
+    update() {
+      if (this.x + this.r > width || this.x - this.r < 0) {
+        this.dx = -this.dx;
+      }
+      if (this.y + this.r > height || this.y - this.r < 0) {
+        this.dy = -this.dy;
+      }
+      this.x += this.dx;
+      this.y += this.dy;
+      this.draw();
+    }
   }
-}
 
-const circleArr = [];
-for (let i = 0; i < 20; i++) {
-  let r = Math.floor(Math.random() * 20) + 1;
-  let x = Math.random() * (width - r * 2) + r;
-  let y = Math.random() * (height - r * 2) + r;
-  let dx = (Math.random() - 0.5) * 5;
-  let dy = (Math.random() - 0.5) * 5;
+  const circleArr = [];
+  for (let i = 0; i < 20; i++) {
+    let r = Math.floor(Math.random() * 20) + 1;
+    let x = Math.random() * (width - r * 2) + r;
+    let y = Math.random() * (height - r * 2) + r;
+    let dx = (Math.random() - 0.5) * 5;
+    let dy = (Math.random() - 0.5) * 5;
 
-  circleArr.push(new Circle(x, y, r, dx, dy));
-}
+    circleArr.push(new Circle(x, y, r, dx, dy));
+  }
 
-function animate() {
-  requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, width, height);
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, width, height);
 
-  for (let i = 0; i < circleArr.length; i++) {
-    for (let j = i + 1; j < circleArr.length; j++) {
-      const c1 = circleArr[i];
-      const c2 = circleArr[j];
+    for (let i = 0; i < circleArr.length; i++) {
+      for (let j = i + 1; j < circleArr.length; j++) {
+        const c1 = circleArr[i];
+        const c2 = circleArr[j];
 
-      const dx = c1.x - c2.x;
-      const dy = c1.y - c2.y;
-      const distance = Math.hypot(dx, dy);
+        const dx = c1.x - c2.x;
+        const dy = c1.y - c2.y;
+        const distance = Math.hypot(dx, dy);
 
-      const maxDistance = 180;
+        const maxDistance = 180;
 
-      if (distance < maxDistance) {
-        const opacity = 1 - distance / maxDistance;
-        ctx.strokeStyle = `rgba(255, 165, 0, ${opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(c1.x, c1.y);
-        ctx.lineTo(c2.x, c2.y);
-        ctx.stroke();
-        ctx.closePath();
+        if (distance < maxDistance) {
+          const opacity = 1 - distance / maxDistance;
+          ctx.strokeStyle = `rgba(255, 165, 0, ${opacity})`;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(c1.x, c1.y);
+          ctx.lineTo(c2.x, c2.y);
+          ctx.stroke();
+          ctx.closePath();
+        }
       }
     }
+
+    for (const circle of circleArr) {
+      circle.update();
+    }
   }
 
-  for (const circle of circleArr) {
-    circle.update();
-  }
+  animate();
 }
-
-animate();
 
 ///////////////////// TOPICS CLOUD SECTION ///////////////////
 
 const topicsWrapper = document.querySelector(".topics-cloud-section .topics-wrapper");
 
-const topicsWrapperFragment = document.createDocumentFragment();
+if (topicsWrapper) createAllTopics();
 
-topicsCloudData.forEach((topicCloudData) => {
-  const a = document.createElement("a");
-  a.classList.add("topic");
-  a.href = topicCloudData.topicYTVideoLink;
-  a.target = "_blank";
+function createAllTopics() {
+  const topicsWrapperFragment = document.createDocumentFragment();
 
-  const img = document.createElement("img");
-  if (topicCloudData.bg) {
-    img.classList.add("bg");
-  }
-  img.src = topicCloudData.topicImg.src;
-  img.alt = topicCloudData.topicImg.alt;
+  topicsCloudData.forEach((topicCloudData) => {
+    const a = document.createElement("a");
+    a.classList.add("topic");
+    a.href = topicCloudData.topicYTVideoLink;
+    a.target = "_blank";
 
-  a.appendChild(img);
+    const img = document.createElement("img");
+    if (topicCloudData.bg) {
+      img.classList.add("bg");
+    }
+    img.src = topicCloudData.topicImg.src;
+    img.alt = topicCloudData.topicImg.alt;
 
-  const span = document.createElement("span");
-  span.innerText = topicCloudData.topicName;
+    a.appendChild(img);
 
-  a.appendChild(span);
+    const span = document.createElement("span");
+    span.innerText = topicCloudData.topicName;
 
-  topicsWrapperFragment.appendChild(a);
-});
+    a.appendChild(span);
 
-topicsWrapper.appendChild(topicsWrapperFragment);
+    topicsWrapperFragment.appendChild(a);
+  });
+
+  topicsWrapper.appendChild(topicsWrapperFragment);
+}
 
 ///////////////// FOOTER ///////////////
 
 const yearSpan = document.getElementById("year");
-const currentYear = new Date().getFullYear();
 
-yearSpan.innerText = currentYear;
+if (yearSpan) {
+  const currentYear = new Date().getFullYear();
+  yearSpan.innerText = currentYear;
+}
 
 ///////////////// PAGES /////////////////
 
 // mailto
 const mailtoAnchorArr = Array.from(document.querySelectorAll(".mailto"));
 
-mailtoAnchorArr.forEach((mailtoAnchor) => {
-  mailtoAnchor.href = "mailto:team@chaicode.com";
-});
+if (mailtoAnchorArr) {
+  mailtoAnchorArr.forEach((mailtoAnchor) => {
+    mailtoAnchor.href = "mailto:team@chaicode.com";
+  });
+}
 
 ///////////////// EXTRA FEATURES /////////////////
 
@@ -461,28 +483,33 @@ if (!window.navigator.onLine) {
 
 // smartphone hover animation 3D effect
 const smartphone = document.querySelector(".download-app-section .app-info-wrapper .left .smartphone");
-const motionMatchMedia = window.matchMedia("(prefers-reduced-motion)");
-const THRESHOLD = 15;
 
-function handleHover(e) {
-  const { clientX, clientY, currentTarget } = e;
-  const { clientWidth, clientHeight } = currentTarget;
-  const offsetLeft = currentTarget.getBoundingClientRect().left;
-  const offsetTop = currentTarget.getBoundingClientRect().top;
+if (smartphone) createSmartphoneAnimation();
 
-  const horizontal = (clientX - offsetLeft) / clientWidth;
-  const vertical = (clientY - offsetTop) / clientHeight;
-  const rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
-  const rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+function createSmartphoneAnimation() {
+  const motionMatchMedia = window.matchMedia("(prefers-reduced-motion)");
+  const THRESHOLD = 15;
 
-  smartphone.style.transform = `perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1, 1, 1)`;
-}
+  function handleHover(e) {
+    const { clientX, clientY, currentTarget } = e;
+    const { clientWidth, clientHeight } = currentTarget;
+    const offsetLeft = currentTarget.getBoundingClientRect().left;
+    const offsetTop = currentTarget.getBoundingClientRect().top;
 
-function resetStyles(e) {
-  smartphone.style.transform = `perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
-}
+    const horizontal = (clientX - offsetLeft) / clientWidth;
+    const vertical = (clientY - offsetTop) / clientHeight;
+    const rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
+    const rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
 
-if (!motionMatchMedia.matches) {
-  smartphone.addEventListener("mousemove", handleHover);
-  smartphone.addEventListener("mouseleave", resetStyles);
+    smartphone.style.transform = `perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1, 1, 1)`;
+  }
+
+  function resetStyles(e) {
+    smartphone.style.transform = `perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
+  }
+
+  if (!motionMatchMedia.matches) {
+    smartphone.addEventListener("mousemove", handleHover);
+    smartphone.addEventListener("mouseleave", resetStyles);
+  }
 }

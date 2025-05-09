@@ -734,7 +734,7 @@ main {
   border-radius: 14px;
   box-shadow: 0 0 10px var(--accent-color);
   min-width: 300px;
-  min-height: 500px;
+  min-height: 400px;
   background: var(--bg-color);
   color: var(--accent-color);
   position: relative;
@@ -2114,7 +2114,7 @@ main.pages {
   text-align: left;
 }
 
-main.pages a {
+main.pages a:not(.join-cohorts-live-classes) {
   color: var(--accent-color);
 }
 
