@@ -2128,6 +2128,7 @@ main.pages h1 {
 
 main.pages h2 {
   font-size: x-large;
+  text-align: left;
 }
 
 main.pages h2::after {
