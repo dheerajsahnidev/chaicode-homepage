@@ -1633,8 +1633,9 @@ main {
   margin-top: 5%;
 }
 
-.free-api-section .top {
+.free-api-section .free-api-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 30px;
@@ -1642,26 +1643,26 @@ main {
   margin-top: 3%;
 }
 
-.free-api-section .top .left {
-  flex-basis: 400px;
+.free-api-section .free-api-info .text-info {
+  max-width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   text-align: center;
-  border-block: 5px solid var(--accent-color);
   padding-block: 10px;
   margin: 10px;
 }
 
-.free-api-section .top .left h3 {
+.free-api-section .free-api-info .text-info h3 {
   font-size: x-large;
   color: var(--accent-color);
 }
 
-.free-api-section .top .right {
-  flex-basis: 500px;
+.free-api-section .free-api-info .yt-video {
+  width: 90%;
+  max-width: 600px;
   border: 5px solid var(--accent-color);
   padding: 10px;
   border-radius: 20px;
@@ -1673,7 +1674,7 @@ main {
   transform: var(--scale-up);
 }
 
-.free-api-section .top .right iframe {
+.free-api-section .free-api-info .yt-video iframe {
   width: 100%;
   aspect-ratio: 16/9;
   border-radius: 10px;
@@ -1835,7 +1836,8 @@ main {
 }
 
 .download-app-section .app-info-wrapper .left {
-  flex-basis: 320px;
+  flex-basis: 1;
+  max-width: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
